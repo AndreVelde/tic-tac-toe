@@ -126,14 +126,10 @@ export class TicTacToe {
     private getSmartMove(): MoveOptions | undefined {
         for (const winnerOption of this.winnerOptions) {
             const [first, second, third] = winnerOption;
-            const firstCell = this._board[first.x][first.y];
-            const secondCell = this._board[second.x][second.y];
-            const thirdCell = this._board[third.x][third.y];
+            const boardCellsForWinnerOption = [this._board[first.x][first.y], this._board[second.x][second.y], this._board[third.x][third.y]];
 
-            const boardCellOfWinnerOption = [firstCell, secondCell, thirdCell];
-
-            const twoCellsOfCurrentUser = boardCellOfWinnerOption.filter((cell) => cell === this._currentPlayer).length === 2;
-            const oneCellStillEmpty = boardCellOfWinnerOption.filter((cell) => cell === CellOptions.EMPTY).length === 1;
+            const twoCellsOfCurrentUser = boardCellsForWinnerOption.filter((cell) => cell === this._currentPlayer).length === 2;
+            const oneCellStillEmpty = boardCellsForWinnerOption.filter((cell) => cell === CellOptions.EMPTY).length === 1;
 
             if (twoCellsOfCurrentUser && oneCellStillEmpty) {
                 return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
