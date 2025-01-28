@@ -39,7 +39,7 @@ describe('Tic tac toe Test', () => {
     it('When player O wants to place their move on the same location as X throw an error', () => {
         const ticTacToe = new TicTacToe();
 
-        expect(() => ticTacToe.makeMove({ x: 30, y: 0 } as MoveOptions)).toThrow('Invalid move, cell out of bounds');
+        expect(() => ticTacToe.makeMove({ row: 30, column: 0 } as MoveOptions)).toThrow('Invalid move, cell out of bounds');
     });
 
     it('Check if vertical win for the left column for player X', () => {

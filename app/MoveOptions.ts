@@ -1,6 +1,6 @@
 interface Coordinate {
-    x: number;
-    y: number;
+    row: number;
+    column: number;
 }
 
 export const Moves = {
@@ -19,16 +19,16 @@ export const Moves = {
 export type Moves = (typeof Moves)[keyof typeof Moves];
 
 export const MoveOptions: Record<Moves, Coordinate> = {
-    TOP_LEFT: { x: 0, y: 0 },
-    TOP_MIDDLE: { x: 0, y: 1 },
-    TOP_RIGHT: { x: 0, y: 2 },
+    TOP_LEFT: { row: 0, column: 0 },
+    TOP_MIDDLE: { row: 0, column: 1 },
+    TOP_RIGHT: { row: 0, column: 2 },
 
-    MIDDLE_LEFT: { x: 1, y: 0 },
-    MIDDLE: { x: 1, y: 1 },
-    MIDDLE_RIGHT: { x: 1, y: 2 },
+    MIDDLE_LEFT: { row: 1, column: 0 },
+    MIDDLE: { row: 1, column: 1 },
+    MIDDLE_RIGHT: { row: 1, column: 2 },
 
-    BOTTOM_LEFT: { x: 2, y: 0 },
-    BOTTOM_MIDDLE: { x: 2, y: 1 },
-    BOTTOM_RIGHT: { x: 2, y: 2 },
+    BOTTOM_LEFT: { row: 2, column: 0 },
+    BOTTOM_MIDDLE: { row: 2, column: 1 },
+    BOTTOM_RIGHT: { row: 2, column: 2 },
 } as const;
 export type MoveOptions = (typeof MoveOptions)[keyof typeof MoveOptions];

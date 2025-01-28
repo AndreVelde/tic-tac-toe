@@ -39,15 +39,15 @@ export class TicTacToe {
     }
 
     public makeMove(move: MoveOptions) {
-        if (this._board.at(move.x)?.at(move.y) === undefined) {
+        if (this._board.at(move.row)?.at(move.column) === undefined) {
             throw new Error('Invalid move, cell out of bounds');
         }
 
-        if (this._board[move.x][move.y] !== CellOptions.EMPTY) {
+        if (this._board[move.row][move.column] !== CellOptions.EMPTY) {
             throw new Error('Invalid move, already occupied cell');
         }
 
-        this._board[move.x][move.y] = this._currentPlayer;
+        this._board[move.row][move.column] = this._currentPlayer;
 
         this.drawBoard();
 
@@ -59,7 +59,11 @@ export class TicTacToe {
     public checkWinner() {
         for (const winnerOption of this.winnerOptions) {
             const [first, second, third] = winnerOption;
-            const boardCellsForWinnerOption = [this._board[first.x][first.y], this._board[second.x][second.y], this._board[third.x][third.y]];
+            const boardCellsForWinnerOption = [
+                this._board[first.row][first.column],
+                this._board[second.row][second.column],
+                this._board[third.row][third.column],
+            ];
 
             if (
                 !boardCellsForWinnerOption.includes(CellOptions.EMPTY) &&
@@ -104,15 +108,11 @@ export class TicTacToe {
             }
         }
 
-        const emptyCells: MoveOptions[] = [];
-
-        for (let x = 0; x < this._board.length; x++) {
-            for (let y = 0; y < this._board[x].length; y++) {
-                if (this._board[x][y] === CellOptions.EMPTY) {
-                    emptyCells.push({ x, y });
-                }
-            }
-        }
+        const emptyCells: MoveOptions[] = this._board.flatMap((row, rowIndex) =>
+            row
+                .map((cell, columnIndex) => (cell === CellOptions.EMPTY ? { row: rowIndex, column: columnIndex } : undefined))
+                .filter((cell) => cell !== undefined),
+        );
 
         return emptyCells[Math.floor(Math.random() * emptyCells.length)];
     }
@@ -120,7 +120,11 @@ export class TicTacToe {
     private getSmartMove(): MoveOptions | undefined {
         for (const winnerOption of this.winnerOptions) {
             const [first, second, third] = winnerOption;
-            const boardCellsForWinnerOption = [this._board[first.x][first.y], this._board[second.x][second.y], this._board[third.x][third.y]];
+            const boardCellsForWinnerOption = [
+                this._board[first.row][first.column],
+                this._board[second.row][second.column],
+                this._board[third.row][third.column],
+            ];
 
             const twoCellsOfCurrentUser = boardCellsForWinnerOption.filter((cell) => cell === this._currentPlayer).length === 2;
             const oneCellStillEmpty = boardCellsForWinnerOption.filter((cell) => cell === CellOptions.EMPTY).length === 1;
@@ -128,15 +132,15 @@ export class TicTacToe {
                 boardCellsForWinnerOption.filter((cell) => cell !== this._currentPlayer && cell !== CellOptions.EMPTY).length === 2;
 
             if (twoCellsOfCurrentUser && oneCellStillEmpty) {
-                return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
+                return winnerOption.find((cell) => this._board[cell.row][cell.column] === CellOptions.EMPTY)!;
             }
 
             if (twoCellsInRowForOpponent && oneCellStillEmpty) {
-                return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
+                return winnerOption.find((cell) => this._board[cell.row][cell.column] === CellOptions.EMPTY)!;
             }
         }
 
-        if (this._board[MoveOptions.MIDDLE.x][MoveOptions.MIDDLE.y] === CellOptions.EMPTY) {
+        if (this._board[MoveOptions.MIDDLE.row][MoveOptions.MIDDLE.column] === CellOptions.EMPTY) {
             return MoveOptions.MIDDLE;
         }
 
