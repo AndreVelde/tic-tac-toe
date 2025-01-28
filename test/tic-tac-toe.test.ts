@@ -139,4 +139,12 @@ describe('Tic tac toe Test', () => {
         expect(ticTacToe.isDraw()).toBeTruthy();
         expect(ticTacToe.currentPlayer).toBe(Player.X);
     });
+
+    it('Bot plays game until draw or there is a winner', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.playGame();
+
+        expect(ticTacToe.isDraw() || ticTacToe.checkWinner()).toBeTruthy();
+    });
 });

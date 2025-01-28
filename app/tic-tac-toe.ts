@@ -76,4 +76,24 @@ export class TicTacToe {
     public isDraw() {
         return !this._board.flat().some((cell) => cell === CellOptions.EMPTY);
     }
+
+    public playGame() {
+        while (!this.checkWinner() && !this.isDraw()) {
+            this.makeMove(this.getRandomMove());
+        }
+    }
+
+    private getRandomMove() {
+        const emptyCells: MoveOptions[] = [];
+
+        for (let x = 0; x < this._board.length; x++) {
+            for (let y = 0; y < this._board[x].length; y++) {
+                if (this._board[x][y] === CellOptions.EMPTY) {
+                    emptyCells.push({ x, y });
+                }
+            }
+        }
+
+        return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    }
 }
