@@ -176,4 +176,16 @@ describe('Tic tac toe Test', () => {
 
         expect(logSpy.mock.calls.at(-1)![0]).toBe('X|O|X\n-----\nO|O|X\n-----\nX|X|O');
     });
+
+    it('Bot chooses winning move if possible', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.TOP_RIGHT);
+        ticTacToe.makeMove(ticTacToe['getRandomMove'](true));
+
+        expect(ticTacToe.checkWinner()).toBeTruthy();
+    });
 });

@@ -79,9 +79,9 @@ export class TicTacToe {
         return !this._board.flat().some((cell) => cell === CellOptions.EMPTY);
     }
 
-    public playGame() {
+    public playGame(smartBot: boolean = false) {
         while (!this.checkWinner() && !this.isDraw()) {
-            this.makeMove(this.getRandomMove());
+            this.makeMove(this.getRandomMove(smartBot));
         }
 
         if (this.isDraw()) {
@@ -104,7 +104,15 @@ export class TicTacToe {
         console.log(boardToDraw.join('\n'));
     }
 
-    private getRandomMove() {
+    private getRandomMove(smartBot: boolean): MoveOptions {
+        if (smartBot) {
+            const smartMove = this.getSmartMove();
+
+            if (smartMove) {
+                return smartMove;
+            }
+        }
+
         const emptyCells: MoveOptions[] = [];
 
         for (let x = 0; x < this._board.length; x++) {
@@ -116,5 +124,25 @@ export class TicTacToe {
         }
 
         return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    }
+
+    private getSmartMove(): MoveOptions | undefined {
+        for (const winnerOption of this.winnerOptions) {
+            const [first, second, third] = winnerOption;
+            const firstCell = this._board[first.x][first.y];
+            const secondCell = this._board[second.x][second.y];
+            const thirdCell = this._board[third.x][third.y];
+
+            const boardCellOfWinnerOption = [firstCell, secondCell, thirdCell];
+
+            const twoCellsOfCurrentUser = boardCellOfWinnerOption.filter((cell) => cell === this._currentPlayer).length === 2;
+            const oneCellStillEmpty = boardCellOfWinnerOption.filter((cell) => cell === CellOptions.EMPTY).length === 1;
+
+            if (twoCellsOfCurrentUser && oneCellStillEmpty) {
+                return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
+            }
+        }
+
+        return undefined;
     }
 }
