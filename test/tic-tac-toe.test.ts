@@ -40,4 +40,31 @@ describe('Tic tac toe Test', () => {
 
         expect(() => ticTacToe.makeMove({ x: 30, y: 0 } as MoveOptions)).toThrow('Invalid move, cell out of bounds');
     });
+
+    it('Check if vertical win for the left row for player X', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_LEFT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_LEFT);
+
+        expect(ticTacToe.checkWinner()).toBeTruthy();
+        expect(ticTacToe.currentPlayer).toBe(Player.X);
+    });
+
+    it('Check if vertical win for the middle row for player O', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_LEFT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_MIDDLE);
+
+        expect(ticTacToe.checkWinner()).toBeTruthy();
+        expect(ticTacToe.currentPlayer).toBe(Player.O);
+    });
 });

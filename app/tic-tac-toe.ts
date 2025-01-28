@@ -3,8 +3,13 @@ import { MoveOptions } from './MoveOptions';
 import { Player } from './Player';
 
 export class TicTacToe {
-    private _board: CellOptions[][];
+    private readonly _board: CellOptions[][];
     private _currentPlayer: Player;
+    private readonly winnerOptions: MoveOptions[][] = [
+        [MoveOptions.TOP_LEFT, MoveOptions.MIDDLE_LEFT, MoveOptions.BOTTOM_LEFT],
+        [MoveOptions.TOP_MIDDLE, MoveOptions.MIDDLE, MoveOptions.BOTTOM_MIDDLE],
+        [MoveOptions.TOP_RIGHT, MoveOptions.MIDDLE_RIGHT, MoveOptions.BOTTOM_RIGHT],
+    ];
 
     constructor() {
         this._currentPlayer = Player.X;
@@ -33,6 +38,28 @@ export class TicTacToe {
         }
 
         this._board[move.x][move.y] = this._currentPlayer;
-        this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
+
+        if (!this.checkWinner()) {
+            this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
+        }
+    }
+
+    public checkWinner() {
+        for (const winnerOption of this.winnerOptions) {
+            const [first, second, third] = winnerOption;
+            const firstCell = this._board[first.x][first.y];
+            const secondCell = this._board[second.x][second.y];
+            const thirdCell = this._board[third.x][third.y];
+
+            if (firstCell === CellOptions.EMPTY || secondCell === CellOptions.EMPTY || thirdCell === CellOptions.EMPTY) {
+                continue;
+            }
+
+            if (firstCell === secondCell && firstCell === thirdCell) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

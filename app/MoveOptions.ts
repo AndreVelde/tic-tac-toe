@@ -3,7 +3,22 @@ interface Coordinate {
     y: number;
 }
 
-export const MoveOptions: Record<string, Coordinate> = {
+export const Moves = {
+    TOP_LEFT: 'TOP_LEFT',
+    TOP_MIDDLE: 'TOP_MIDDLE',
+    TOP_RIGHT: 'TOP_RIGHT',
+
+    MIDDLE_LEFT: 'MIDDLE_LEFT',
+    MIDDLE: 'MIDDLE',
+    MIDDLE_RIGHT: 'MIDDLE_RIGHT',
+
+    BOTTOM_LEFT: 'BOTTOM_LEFT',
+    BOTTOM_MIDDLE: 'BOTTOM_MIDDLE',
+    BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+} as const;
+export type Moves = (typeof Moves)[keyof typeof Moves];
+
+export const MoveOptions: Record<Moves, Coordinate> = {
     TOP_LEFT: { x: 0, y: 0 },
     TOP_MIDDLE: { x: 1, y: 0 },
     TOP_RIGHT: { x: 2, y: 0 },
