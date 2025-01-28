@@ -78,6 +78,7 @@ export class TicTacToe {
 
     public playGame(smartBot: boolean = false) {
         while (!this.checkWinner() && !this.isDraw()) {
+            console.log(`Currently playing: ${this._currentPlayer}`);
             this.makeMove(this.getRandomMove(smartBot));
         }
 
@@ -89,16 +90,9 @@ export class TicTacToe {
     }
 
     private drawBoard() {
-        const boardToDraw: string[] = [];
+        const boardToDraw = this._board.map((row) => row.map((cell) => (cell === CellOptions.EMPTY ? ' ' : cell)).join('|')).join('\n-----\n');
 
-        this._board.forEach((row, index) => {
-            boardToDraw.push(row.map((cell) => (cell === CellOptions.EMPTY ? ' ' : cell)).join('|'));
-            if (index < this._board.length - 1) {
-                boardToDraw.push('-----');
-            }
-        });
-
-        console.log(boardToDraw.join('\n'));
+        console.log(boardToDraw);
     }
 
     private getRandomMove(smartBot: boolean): MoveOptions {
