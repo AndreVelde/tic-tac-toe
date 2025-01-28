@@ -49,7 +49,7 @@ export class TicTacToe {
 
         this._board[move.x][move.y] = this._currentPlayer;
 
-        if (!this.checkWinner()) {
+        if (!this.checkWinner() && !this.isDraw()) {
             this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
         }
     }
@@ -71,5 +71,9 @@ export class TicTacToe {
         }
 
         return false;
+    }
+
+    public isDraw() {
+        return !this._board.flat().some((cell) => cell === CellOptions.EMPTY);
     }
 }

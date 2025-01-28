@@ -121,4 +121,22 @@ describe('Tic tac toe Test', () => {
         expect(ticTacToe.checkWinner()).toBeTruthy();
         expect(ticTacToe.currentPlayer).toBe(Player.O);
     });
+
+    it('Check if draw when no options are available anymore', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.TOP_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_LEFT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_LEFT);
+
+        expect(ticTacToe.checkWinner()).toBeFalsy();
+        expect(ticTacToe.isDraw()).toBeTruthy();
+        expect(ticTacToe.currentPlayer).toBe(Player.X);
+    });
 });
