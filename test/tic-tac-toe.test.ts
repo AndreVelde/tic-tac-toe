@@ -33,4 +33,10 @@ describe('Tic tac toe Test', () => {
 
         expect(() => ticTacToe.makeMove(0, 0)).toThrow('Invalid move, already occupied cell');
     });
+
+    it('When player O wants to place their move on the same location as X throw an error', () => {
+        const ticTacToe = new TicTacToe();
+
+        expect(() => ticTacToe.makeMove(30, 0)).toThrow('Invalid move, cell out of bounds');
+    });
 });

@@ -23,6 +23,10 @@ export class TicTacToe {
     }
 
     public makeMove(x: number, y: number) {
+        if (this._board.at(x)?.at(y) === undefined) {
+            throw new Error('Invalid move, cell out of bounds');
+        }
+
         if (this._board[x][y] === CellOptions.EMPTY) {
             this._board[x][y] = this._currentPlayer;
             this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
