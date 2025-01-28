@@ -142,6 +142,10 @@ export class TicTacToe {
             }
         }
 
+        if (this._board[MoveOptions.MIDDLE.x][MoveOptions.MIDDLE.y] === CellOptions.EMPTY) {
+            return MoveOptions.MIDDLE;
+        }
+
         return undefined;
     }
 }

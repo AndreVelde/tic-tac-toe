@@ -200,4 +200,24 @@ describe('Tic tac toe Test', () => {
 
         expect(ticTacToe.checkWinner()).toBeFalsy();
     });
+
+    it('Bot always chooses middle of the board option if possible', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(ticTacToe['getRandomMove'](true));
+
+        expect(ticTacToe.board).toStrictEqual([
+            ['', '', ''],
+            ['', 'X', ''],
+            ['', '', ''],
+        ]);
+    });
+
+    it('Bot chooses random move if it cant win', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+
+        expect(ticTacToe['getSmartMove']()).toBeUndefined();
+    });
 });
