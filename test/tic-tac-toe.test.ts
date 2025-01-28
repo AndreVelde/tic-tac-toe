@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { MoveOptions } from '../app/MoveOptions';
 import { Player } from '../app/Player';
 import { TicTacToe } from '../app/tic-tac-toe';
@@ -146,5 +147,33 @@ describe('Tic tac toe Test', () => {
         ticTacToe.playGame();
 
         expect(ticTacToe.isDraw() || ticTacToe.checkWinner()).toBeTruthy();
+    });
+
+    it('Draw board when only the first move was set', () => {
+        const logSpy = jest.spyOn(console, 'log');
+
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+
+        expect(logSpy.mock.calls[0][0]).toBe('X| | \n-----\n | | \n-----\n | | ');
+    });
+
+    it('Draw board with draw situation', () => {
+        const logSpy = jest.spyOn(console, 'log');
+
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.TOP_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_LEFT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_LEFT);
+
+        expect(logSpy.mock.calls.at(-1)![0]).toBe('X|O|X\n-----\nO|O|X\n-----\nX|X|O');
     });
 });

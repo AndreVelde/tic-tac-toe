@@ -49,6 +49,8 @@ export class TicTacToe {
 
         this._board[move.x][move.y] = this._currentPlayer;
 
+        this.drawBoard();
+
         if (!this.checkWinner() && !this.isDraw()) {
             this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
         }
@@ -81,6 +83,25 @@ export class TicTacToe {
         while (!this.checkWinner() && !this.isDraw()) {
             this.makeMove(this.getRandomMove());
         }
+
+        if (this.isDraw()) {
+            console.log('Draw!');
+        } else {
+            console.log(`Player ${this._currentPlayer} wins!`);
+        }
+    }
+
+    private drawBoard() {
+        const boardToDraw: string[] = [];
+
+        this._board.forEach((row, index) => {
+            boardToDraw.push(row.map((cell) => (cell === CellOptions.EMPTY ? ' ' : cell)).join('|'));
+            if (index < this._board.length - 1) {
+                boardToDraw.push('-----');
+            }
+        });
+
+        console.log(boardToDraw.join('\n'));
     }
 
     private getRandomMove() {
