@@ -9,6 +9,10 @@ export class TicTacToe {
         [MoveOptions.TOP_LEFT, MoveOptions.MIDDLE_LEFT, MoveOptions.BOTTOM_LEFT],
         [MoveOptions.TOP_MIDDLE, MoveOptions.MIDDLE, MoveOptions.BOTTOM_MIDDLE],
         [MoveOptions.TOP_RIGHT, MoveOptions.MIDDLE_RIGHT, MoveOptions.BOTTOM_RIGHT],
+
+        [MoveOptions.TOP_LEFT, MoveOptions.TOP_MIDDLE, MoveOptions.TOP_RIGHT],
+        [MoveOptions.MIDDLE_LEFT, MoveOptions.MIDDLE, MoveOptions.MIDDLE_RIGHT],
+        [MoveOptions.BOTTOM_RIGHT, MoveOptions.BOTTOM_MIDDLE, MoveOptions.BOTTOM_RIGHT],
     ];
 
     constructor() {
