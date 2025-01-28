@@ -188,4 +188,16 @@ describe('Tic tac toe Test', () => {
 
         expect(ticTacToe.checkWinner()).toBeTruthy();
     });
+
+    it('Bot blocks winning move if possible', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(ticTacToe['getRandomMove'](true));
+        ticTacToe.makeMove(ticTacToe['getRandomMove'](true));
+
+        expect(ticTacToe.checkWinner()).toBeFalsy();
+    });
 });

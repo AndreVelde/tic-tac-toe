@@ -130,8 +130,14 @@ export class TicTacToe {
 
             const twoCellsOfCurrentUser = boardCellsForWinnerOption.filter((cell) => cell === this._currentPlayer).length === 2;
             const oneCellStillEmpty = boardCellsForWinnerOption.filter((cell) => cell === CellOptions.EMPTY).length === 1;
+            const twoCellsInRowForOpponent =
+                boardCellsForWinnerOption.filter((cell) => cell !== this._currentPlayer && cell !== CellOptions.EMPTY).length === 2;
 
             if (twoCellsOfCurrentUser && oneCellStillEmpty) {
+                return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
+            }
+
+            if (twoCellsInRowForOpponent && oneCellStillEmpty) {
                 return winnerOption.find((cell) => this._board[cell.x][cell.y] === CellOptions.EMPTY)!;
             }
         }
