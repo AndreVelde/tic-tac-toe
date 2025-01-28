@@ -220,4 +220,12 @@ describe('Tic tac toe Test', () => {
 
         expect(ticTacToe['getSmartMove']()).toBeUndefined();
     });
+
+    it('Bot plays game in a smart way until draw or there is a winner', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.playGame(true);
+
+        expect(ticTacToe.isDraw() || ticTacToe.checkWinner()).toBeTruthy();
+    });
 });
