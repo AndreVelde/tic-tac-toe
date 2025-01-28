@@ -94,4 +94,31 @@ describe('Tic tac toe Test', () => {
         expect(ticTacToe.checkWinner()).toBeTruthy();
         expect(ticTacToe.currentPlayer).toBe(Player.X);
     });
+
+    it('Check if diagonal win for top left to bottom right for player X', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_MIDDLE);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.TOP_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+
+        expect(ticTacToe.checkWinner()).toBeTruthy();
+        expect(ticTacToe.currentPlayer).toBe(Player.X);
+    });
+
+    it('Check if diagonal win for top right to bottom left for player O', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(MoveOptions.TOP_LEFT);
+        ticTacToe.makeMove(MoveOptions.TOP_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE_RIGHT);
+        ticTacToe.makeMove(MoveOptions.MIDDLE);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_RIGHT);
+        ticTacToe.makeMove(MoveOptions.BOTTOM_LEFT);
+
+        expect(ticTacToe.checkWinner()).toBeTruthy();
+        expect(ticTacToe.currentPlayer).toBe(Player.O);
+    });
 });

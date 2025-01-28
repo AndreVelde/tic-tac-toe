@@ -6,13 +6,19 @@ export class TicTacToe {
     private readonly _board: CellOptions[][];
     private _currentPlayer: Player;
     private readonly winnerOptions: MoveOptions[][] = [
+        // Vertical wins
         [MoveOptions.TOP_LEFT, MoveOptions.MIDDLE_LEFT, MoveOptions.BOTTOM_LEFT],
         [MoveOptions.TOP_MIDDLE, MoveOptions.MIDDLE, MoveOptions.BOTTOM_MIDDLE],
         [MoveOptions.TOP_RIGHT, MoveOptions.MIDDLE_RIGHT, MoveOptions.BOTTOM_RIGHT],
 
+        // Horizontal wins
         [MoveOptions.TOP_LEFT, MoveOptions.TOP_MIDDLE, MoveOptions.TOP_RIGHT],
         [MoveOptions.MIDDLE_LEFT, MoveOptions.MIDDLE, MoveOptions.MIDDLE_RIGHT],
         [MoveOptions.BOTTOM_RIGHT, MoveOptions.BOTTOM_MIDDLE, MoveOptions.BOTTOM_RIGHT],
+
+        // Diagonal wins
+        [MoveOptions.TOP_LEFT, MoveOptions.MIDDLE, MoveOptions.BOTTOM_RIGHT],
+        [MoveOptions.TOP_RIGHT, MoveOptions.MIDDLE, MoveOptions.BOTTOM_LEFT],
     ];
 
     constructor() {
