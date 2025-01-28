@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build-clean": "tsc --build --clean",
     "test": "jest",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "build": "tsc app/start-game.ts",
+    "start-game": "node app/start-game.js"
   },
   "keywords": [],
   "author": "",
