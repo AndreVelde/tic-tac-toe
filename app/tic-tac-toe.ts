@@ -59,15 +59,12 @@ export class TicTacToe {
     public checkWinner() {
         for (const winnerOption of this.winnerOptions) {
             const [first, second, third] = winnerOption;
-            const firstCell = this._board[first.x][first.y];
-            const secondCell = this._board[second.x][second.y];
-            const thirdCell = this._board[third.x][third.y];
+            const boardCellsForWinnerOption = [this._board[first.x][first.y], this._board[second.x][second.y], this._board[third.x][third.y]];
 
-            if (firstCell === CellOptions.EMPTY || secondCell === CellOptions.EMPTY || thirdCell === CellOptions.EMPTY) {
-                continue;
-            }
-
-            if (firstCell === secondCell && firstCell === thirdCell) {
+            if (
+                !boardCellsForWinnerOption.includes(CellOptions.EMPTY) &&
+                boardCellsForWinnerOption.every((cell) => cell === boardCellsForWinnerOption[0])
+            ) {
                 return true;
             }
         }
