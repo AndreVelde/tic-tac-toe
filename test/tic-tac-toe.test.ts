@@ -17,4 +17,12 @@ describe('Tic tac toe Test', () => {
 
         expect(ticTacToe.currentPlayer).toBe(Player.X);
     });
+
+    it('When player X makes a move player O should become the current player', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(0, 0);
+
+        expect(ticTacToe.currentPlayer).toBe(Player.O);
+    });
 });
