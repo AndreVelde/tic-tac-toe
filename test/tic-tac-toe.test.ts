@@ -1,7 +1,13 @@
 import { TicTacToe } from '../app/tic-tac-toe';
 
 describe('Tic tac toe Test', () => {
-    it('should pass', () => {
-        expect(new TicTacToe()).toBe('dojo');
+    it('board is created with a 3 by 3 grid', () => {
+        const ticTacToe = new TicTacToe();
+
+        expect(ticTacToe.board).toStrictEqual([
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', ''],
+        ]);
     });
 });
