@@ -25,4 +25,12 @@ describe('Tic tac toe Test', () => {
 
         expect(ticTacToe.currentPlayer).toBe(Player.O);
     });
+
+    it('When player O wants to place their move on the same location as X throw an error', () => {
+        const ticTacToe = new TicTacToe();
+
+        ticTacToe.makeMove(0, 0);
+
+        expect(() => ticTacToe.makeMove(0, 0)).toThrow('Invalid move, already occupied cell');
+    });
 });

@@ -26,6 +26,8 @@ export class TicTacToe {
         if (this._board[x][y] === CellOptions.EMPTY) {
             this._board[x][y] = this._currentPlayer;
             this._currentPlayer = this._currentPlayer === Player.X ? Player.O : Player.X;
+        } else {
+            throw new Error('Invalid move, already occupied cell');
         }
     }
 }
