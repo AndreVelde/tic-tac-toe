@@ -110,7 +110,11 @@ export class TicTacToe {
 
         const emptyCells: MoveOptions[] = this._board.flatMap((row, rowIndex) =>
             row
-                .map((cell, columnIndex) => (cell === CellOptions.EMPTY ? { row: rowIndex, column: columnIndex } : undefined))
+                .map((cell, columnIndex) =>
+                    cell === CellOptions.EMPTY
+                        ? Object.values(MoveOptions).find((move) => move.row === rowIndex && move.column === columnIndex)
+                        : undefined,
+                )
                 .filter((cell) => cell !== undefined),
         );
 
